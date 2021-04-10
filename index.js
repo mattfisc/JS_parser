@@ -17,39 +17,40 @@ fs.readFile('data.txt', (err, string_data) => {
 
         // Split segment | field name | field
         seg_array = element.split('|');
-
-        var new_segment = null;
+        let new_segment = null;
         for (let index = 0; index < seg_array.length; index++) {
             const element = seg_array[index];
-            
+
             // Segment
-            if(element.match('[A-Z]{3}') && element.length == 3 && new_segment === null){
+            if(element.match('[A-Z]{3}') && element.length == 3 ){
                 new_segment = new Segment(element);
                 data.push(new_segment);
             }
 
             // Field
-            else if(new_segment !== null){
+            else{
                 let name = element.substring(0,3);
                 let value = element.substring(3);
                 // Check if fields are valid
                 if(name.match('[A-Z]{3}')){
                     new_segment.add_field(name,value);
-                    console.log(name,value);
                 }
                 else{
                     console.log("error reading");
                 }
             }
 
-            else{
-                console.log("error not caught ", element);
-            }
 
         }
     }
-    //console.log(data.split('||'));
-    //console.log(data.toString());
+    
+
+    data.forEach(element => {
+        console.log(element.seg_name);
+        element.field.forEach(field => {
+            console.log(this.name);
+        });
+    });
 })
 
 
@@ -74,8 +75,9 @@ class Segment{
         this.field = [];
     }
 
-    add_field(field){
-        this.field.push(field);
+    add_field(name,value){
+        var add_field = new Field(name,value);
+        this.field.push(add_field);
     }
 
     get_seg_by_name(seg_name){
@@ -109,6 +111,5 @@ class Field{
         this.name = name;
         this.value = value;
     }
-
 
 }
