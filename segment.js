@@ -27,7 +27,10 @@ class Segment{
         }
     }
     get_seg_by_fieldname(fieldname){
-        
+        for (let index = 0; index < array.length; index++) {
+            const element = array[index];
+            
+        }
     }
     get_seg_by_field(field){
         
