@@ -1,8 +1,8 @@
 
 data = [];
 
-const fs = require('fs');
-  
+var fs = require('fs');
+
 fs.readFile('data.txt', (err, string_data) => {
     if (err) throw err;
   
@@ -11,6 +11,8 @@ fs.readFile('data.txt', (err, string_data) => {
 
     parse_data(data_array);
 })
+
+
 
 function parse_data(data_array){
     // Create Segment Object List
@@ -62,8 +64,8 @@ function search(){
 
     var result = [];
     result.push( search_by_segment(input) );
-    result.push( search_by_name(input) );
-    result.push( search_by_value(input) );
+    // result.push( search_by_name(input) );
+    // result.push( search_by_value(input) );
 
 }
 
@@ -83,19 +85,52 @@ function search_by_segment(input){
         });
     });
 
-    return result;
+    // clear old results
+    var table = document.getElementById("result");
+    table.innerHTML = "";
+
+    // add new results
+    if(result.length !== 0)
+        display_result(result);
+    else   
+        display_no_result(input);
+
+}
+function display_no_result(input){
+    var table = document.getElementById('result');
+    var row = document.createElement('tr');
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode("NO RESULTS FOUND FOR " + input));
+    row.appendChild(cell);
+    table.appendChild(row);
 }
 
-// function search_by_name(input){
-//     var result = [];
+function display_result(result){
+    
+    var table = document.getElementById('result');
 
-//     return result;
-// }
-// function search_by_value(input){
-//     var result = [];
+    for (let index = 0; index < result.length; index++) {
+        const element = result[index];
+        var row = document.createElement('tr');
 
-//     return result;
-// }
+        // add data row number
+        var cell_num = document.createElement('td');
+        cell_num.appendChild(document.createTextNode(index));
+        row.appendChild(cell_num);
+        // add segment to first cell
+        var cell_segment = document.createElement('td');
+        var cell_text = document.createTextNode(element.seg_name);
+        row.appendChild(cell_text);
+        element.field.forEach(fields => {
+            // add field name,value
+            var cell_name = document.createElement('td');
+            var cell_value = document.createElement('td');
+        });
+
+        // Add to table
+        table.appendChild(row);
+    }
+}
 
 
 
