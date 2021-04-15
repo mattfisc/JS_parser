@@ -1,16 +1,20 @@
-
+file = "DSD|ASDasdfsad|DOB12/04/1903||MAT|ADSasdfasdfa";
 data = [];
 
-var fs = require('fs');
 
-fs.readFile('data.txt', (err, string_data) => {
-    if (err) throw err;
-  
-    // Split data by Segment
-    data_array = string_data.toString().split('||');
 
-    parse_data(data_array);
-})
+    var fs = require('fs');
+
+    fs.readFile('data.txt', (err, string_data) => {
+        if (err) throw err;
+    
+        // Split data by Segment
+        data_array = string_data.toString().split('||');
+
+        parse_data(data_array);
+    })
+
+
 
 
 
@@ -30,7 +34,7 @@ function parse_data(data_array){
             // Segment
             if(element.match('[A-Z]{3}') && element.length == 3 ){
                 new_segment = new Segment(element);
-                data.push(new_segment);
+                this.data.push(new_segment);
             }
 
             // Field
@@ -49,12 +53,15 @@ function parse_data(data_array){
         }
     }
 
-    //tester
+
+    //search("MAT");
+    // document.getElementById('here').innerHTML = JSON.stringify;
+    // //tester
     // data.forEach(element => {
-    //     console.log("Segment:\n\t",element.seg_name);
+    //     console.log("Segment:\n\tName:\n\t\t",element.seg_name);
     //     element.field.forEach(field => {
-    //         console.log("Field:\n\tname:",field.name);
-    //         console.log("\tvalue",field.value);
+    //         console.log("\tField:\n\t\tname:",field.name);
+    //         console.log("\t\tvalue",field.value);
     //     });
     // });
 }
@@ -64,9 +71,8 @@ function search(){
 
     var result = [];
     result.push( search_by_segment(input) );
-    // result.push( search_by_name(input) );
-    // result.push( search_by_value(input) );
 
+    console.log(result);
 }
 
 function search_by_segment(input){
@@ -76,7 +82,6 @@ function search_by_segment(input){
         
         if(element.localeCompare(input))
             result.push(element);
-
         element.field.forEach(field => {
             if(field.name.localeCompare(input))
                 result.push(element);
@@ -84,11 +89,14 @@ function search_by_segment(input){
             result.push(element);
         });
     });
-
+    
+    console.log(result);
     // clear old results
     var table = document.getElementById("result");
     table.innerHTML = "";
 
+
+    console.log(result);
     // add new results
     if(result.length !== 0)
         display_result(result);
@@ -111,6 +119,7 @@ function display_result(result){
 
     for (let index = 0; index < result.length; index++) {
         const element = result[index];
+        console.log(element.seg_name);
         var row = document.createElement('tr');
 
         // add data row number
@@ -124,6 +133,8 @@ function display_result(result){
         element.field.forEach(fields => {
             // add field name,value
             var cell_name = document.createElement('td');
+            cell_name.appendChild(document.createTextNode(index));
+            row.appendChild(cell_name);
             var cell_value = document.createElement('td');
         });
 
