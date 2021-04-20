@@ -28,11 +28,7 @@ You can edit the data.txt file
 At this time it returns the whole Segment to show the segment it is in.  
 
 # Test Cases
-I appologize for not implementing test cases. I know how to in Java and Python.
+I appologize for not implementing test cases. I know how to do test cases in Java and Python.
 If I had more time I could learn node.js.  I wanted to get this version of the 
 project submitted.
 
-
-
-node.js
-npm install noder.io
