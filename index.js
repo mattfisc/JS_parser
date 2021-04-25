@@ -1,21 +1,25 @@
 var file = "";
 var data = [];
 
-// As with JSON, use the Fetch API & ES6
 
-fetch('data.txt')
-  .then(response => response.text())
-  .then(file => {
-    // Do something with your data
-    parse_data(file);
-  });
+function load_file(){
+    // use the Fetch API & ES6
+    fetch('data.txt')
+        .then(response => response.text())
+        .then(file => {
+        parse_data(file);
+    });
+
+
+}
+
+
 
 
 
 
 function parse_data(s){
     s = s.replace(/(\r\n|\n|\r)/gm, "");
-    //s = s.replaceAll("\n", "");
     // Split data by Segment
     data_array = s.split('||');
 
