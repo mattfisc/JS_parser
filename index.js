@@ -186,7 +186,7 @@ class Field{
         return "name: " + this.name + " value: " + this.value;
     }
 }
-=======
+
 
 
 data = [];
@@ -217,6 +217,7 @@ fs.readFile('data.txt', (err, string_data) => {
     }
     //console.log(data.split('||'));
     //console.log(data.toString());
-})
->>>>>>> Stashed changes
+}
+)
+
 
